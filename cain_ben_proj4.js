@@ -96,6 +96,57 @@ var NumberLibrary = function () {
 	};
 };
 
+// Array Library
+var ArrayLibrary = function () {
+	// Find the smallest value in an array that is greater than a given number
+	var smValGNumInArray = function (array,num) {
+		array.sort(function(a,b){return a-b;});
+		if (num >= array[0] && num < array[array.length-1]) {
+			array.push(num);
+			array.sort(function(a,b){return a-b;});
+			var result = array[array.lastIndexOf(num) + 1];
+			return result;
+		} else {
+			return null;
+		};
+	};
+	// Find the total value of just the numbers in an array, even if some of the items are not numbers.
+	var lrgValLNumInArray = function (array,num) {
+		array.sort(function(a,b){return a-b;});
+		if (num > array[0] && num <= array[array.length-1]) {
+			array.push(num);
+			array.sort(function(a,b){return a-b;});
+			var result = array[array.indexOf(num) - 1];
+			return result;
+		} else {
+			return null;
+		};
+	};
+	// Add up and total only numbers in an array
+//MAKEUP: For Loop Proj 2 -----------------------------------------------
+	var totalValNumInArray = function (array) {
+		var total = 0;
+		for (var i = 0, j = array.length; i < j; i++) {
+			if (array[i]/1 === array[i]) {
+				total += array[i];
+			};
+		};
+		return total;
+	};
+	// Given an array of objects and the name of a key, return the array sorted by the value of that key in each of the objects: "a" + [{a:2},{a:3},{a:1}] = [{a:1},{a:2},{a:3}].
+	var sortKeyByValInArray = function (array,givenKey) {
+		return (array.sort(function(a,b){return a[givenKey] - b[givenKey];}));
+	};
+
+
+	return {
+		"smValGNumInArray" : smValGNumInArray,
+		"lrgValLNumInArray" : lrgValLNumInArray,
+		"totalValNumInArray" : totalValNumInArray,
+		"sortKeyByValInArray" : sortKeyByValInArray,
+	};
+};
+
 // String Console
 console.log("String Tests");
 var StringLibrary = StringLibrary();
@@ -129,3 +180,19 @@ console.log("Difference in days: " + timeConversion[0] + ", in hours: " + timeCo
 console.log(numberLib.strToNum("5678"));
 console.log(" ");
 
+// Array Console
+console.log("Array Tests");
+var arrayLib = ArrayLibrary();
+var numList = [1,5,7,34,2,6,17,3,90];
+console.log("My array is " + numList);
+console.log("Smallest number in array greater than 1");
+console.log(arrayLib.smValGNumInArray(numList,1));
+console.log("Largest number in array (greater than 8)");
+console.log("broken");
+console.log(arrayLib.lrgValLNumInArray(numList,8));
+var randomList = [10,"apple","orange",10,20,"10"];
+console.log("Add only the numbers in this array (no strings) : " + randomList);
+console.log(arrayLib.totalValNumInArray(randomList));
+console.log("sorting objects by key");
+var arrayObjects = [{a:6},{a:1},{a:8},{a:2},{a:3},{a:5},{a:4},{a:7},{b:3},{b:5},{b:1},{b:4},{b:2},{b:6},{c:3},{c:5},{c:1},{c:4},{c:2},{c:6}];
+console.log(arrayLib.sortKeyByValInArray(arrayObjects,"a"));
